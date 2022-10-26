@@ -1,0 +1,146 @@
+Osztály: Elem
+    Adattagok:
+	- ev: szöveg
+	- nev: szöveg
+	- vegyjel : szöveg
+	- rszam : egész
+	- tudos : szöveg
+
+    Tulajdonságok:
+	+<<prop>> Ev: szöveg {readonly}
+	+<<prop>> Nev: szöveg {readonly}
+	+<<prop>> Vegyjel : szöveg {readonly}
+	+<<prop>> Rszam : egész {readonly}
+	+<<prop>> Tudos : szöveg {readonly}
+
+    Metódusok:
+	+ Elem(ev, nev, vegyjel, rszam, tudos)
+-------------------------------------------------------
+2. feladat
+
+System.OI hozzáadás
+
+Lista : Elemek (Láthatóság egész feladatban)
+
+be: StreamReader
+
+Beolvas: be
+
+Ciklus amíg nem vagyunk a fájl végén
+
+   a : szöveges tömb
+   a := Beolvas: be és ';' mentén szétvág
+   Hozzáad: Elemek-hez új Elem( a[0], a[1], a[2], EgészKonv(a[3]), a[4])
+
+Ciklus vége
+
+Bezár: be
+----------------------------------------------------------
+3. feladat
+
+Kiirás: "3. feladat: Elemek száma: {Elemek.Száma}"
+
+----------------------------------------------------------
+4. feladat
+
+db: egész
+db := 0
+
+Ciklus az Elemek listán
+	Ha Elemek.Ev = "Ókor", akkor
+		db++
+	Feltétel vége
+
+Ciklus vége
+
+Kiírás: "4. feladat: Felfedezések száma az ókorban: {db}"
+
+----------------------------------------------------------
+5. feladat
+
+vegyjel : szöveg (Láthatóság egész feladatban)
+
+Ciklus
+	nemjo : logikai
+	nemjo = hamis
+
+	Bekér: vegyjel
+
+	Ha vegyjel hossza > 2 vagy vegyjel = "", akkor
+		nemjo = igaz
+	Feltétel vége
+
+	Ciklus vegyjel karakterein végig
+		Ha nem karakter, akkor
+			nemjo = igaz
+		Feltétel vége
+	Ciklus vége 
+Amíg nem jó
+
+----------------------------------------------------------
+6. feladat
+
+
+i : egész
+i := 0
+
+Ciklus amíg i < Elemek.Hossza és Elemek[i].Kisbetűre != vegyjel.Kisbetűre
+	i++
+Ciklus vége
+
+Ha i < Elemek.Hossza, akkor
+	Kiir: Mindent a minta szerint
+Egyébként
+	Kiir: "Nincs ilyen elem az adatforrásban."
+Feltétel vége
+
+----------------------------------------------------------
+7. feladat
+
+i : egész
+i := 0
+
+Ciklus amíg Elemek.Ev = "Ókor"
+	i++
+Ciklus vége
+
+max : egész
+max = EgészKonv(Elemek[i+1].Ev) - EgészKonv(Elemek.[i].Ev)
+i++
+
+Ciklus amíg i < Elemek.Hossza - 1
+	Ha max < EgészKonv(Elemek[i+1].Ev) - EgészKonv(Elemek.[i].Ev), akkor
+		max = EgészKonv(Elemek[i+1].Ev) - EgészKonv(Elemek.[i].Ev)
+	Feltétel vége
+Ciklus vége
+
+Kiir: "7. feladat: {max} év volt..."
+
+----------------------------------------------------------
+8. feladat
+
+stat : Dictionary<string, egész>
+
+i : egész
+i := 0
+
+Ciklus amíg Elemek.Ev = "Ókor"
+	i++
+Ciklus vége
+
+Ciklus i < Elemek.Hossza-ig 
+	Ha stat nem tartalmazza az Elemek[i].Evet, akkor
+		stat.Hozzáad(Elemek[i].Ev, 1)
+	Egyébként
+		stat[Elemek[i].Ev]++
+	Feltétel vége
+	i++
+Ciklus vége
+
+Kiir: "8. feladat: Statisztika"
+
+Ciklus a stat elemein
+	Ha stat.Value > 3, akkor
+		Kiir: "{Key} : {Value} db"
+	Feltétel vége
+Ciklus vége
