@@ -20,9 +20,24 @@ namespace Kemia
             OtodikFeladat(out vegyjel);
             HatodikFeladat(vegyjel);
             HetedikFeladat();
-            
+            NyolcadikFeladat();
 
             Console.ReadKey();
+        }
+
+        private static void NyolcadikFeladat()
+        {
+            Console.WriteLine("8. feladat: Statisztika");
+            var lekerdezes = (from adat in adatok
+                             group adat by adat.Ev).ToList(); ;
+            foreach (var sor in lekerdezes)
+            {
+                int ev;
+                if (int.TryParse(sor.Key, out ev) && sor.Sum(x => 1) > 3)
+                {
+                    Console.WriteLine($"\t{ev}: {sor.Sum(x => 1)} db");
+                }
+            }
         }
 
         private static void HetedikFeladat()
