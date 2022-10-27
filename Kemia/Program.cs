@@ -19,8 +19,24 @@ namespace Kemia
             string vegyjel = "";
             OtodikFeladat(out vegyjel);
             HatodikFeladat(vegyjel);
+            HetedikFeladat();
+            
 
             Console.ReadKey();
+        }
+
+        private static void HetedikFeladat()
+        {
+            int kulonbseg = 0;
+            for (int i = 0; i < adatok.Count - 1; i++)
+            {
+                int ev1, ev2;
+                if (int.TryParse(adatok[i].Ev, out ev1) && int.TryParse(adatok[i + 1].Ev, out ev2))
+                {
+                    kulonbseg = kulonbseg < Math.Abs(ev1 - ev2) ? Math.Abs(ev1 - ev2) : kulonbseg;
+                }
+            }
+            Console.WriteLine($"7. feladat: {kulonbseg} év volt a leghosszabb időszak két elem felfedezése között.");
         }
 
         private static void HatodikFeladat(string vegyjel)
@@ -82,7 +98,7 @@ namespace Kemia
         private static void NegyedikFeladat()
         {
             int okor = 0;
-            foreach (var adat in adatok) if (adat.Ev.ToLower() == "ókor") okor++;
+            foreach (Kemia adat in adatok) if (adat.Ev.ToLower() == "ókor") okor++;
             Console.WriteLine($"4. feladat: Felfedezések száma az ókorban: {okor}");
         }
 
