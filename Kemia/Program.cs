@@ -27,7 +27,7 @@ namespace Kemia
         {
             bool megvan = false;
             int i = 0;
-            Kemia keresett;
+            Kemia keresett = new Kemia();
             while (!megvan && i < adatok.Count)
             {
                 if (adatok[i].Vegyjel.ToLower() == vegyjel.ToLower())
@@ -37,20 +37,45 @@ namespace Kemia
                 }
                 i++;
             }
-
             if (megvan)
             {
-                Console.WriteLine("\t");
+                Console.WriteLine($"6. feladat: Keresés\n" +
+                    $"\tAz elem vegyjele: {keresett.Vegyjel}\n" +
+                    $"\tAz elem neve: {keresett.Elem}\n" +
+                    $"\tRendszáma: {keresett.Rendszam}\n" +
+                    $"\tFelfedezés éve: {keresett.Ev}\n" +
+                    $"\tFelfedező: {keresett.Felfedezo}");
             }
         }
 
         private static void OtodikFeladat(out string vegyjel)
         {
             vegyjel = "";
-            while (!(vegyjel.Length <= 2 && vegyjel.Length >= 1 && vegyjel.All(Char.IsLetter)))
+            while (!HelyesVegyjel(vegyjel))
             {
                 Console.Write("5. feladat: Kérek egy vegyjelet: ");
                 vegyjel = Console.ReadLine();
+            }
+        }
+
+        private static bool HelyesVegyjel(string vegyjel)
+        {
+            if (vegyjel.Length == 1 || vegyjel.Length == 2)
+            {
+                bool megfelelo = true;
+                foreach (char c in vegyjel.ToLower())
+                {
+                    int charValue = Convert.ToInt32(c);
+                    if (!(97 <= charValue && charValue <= 122))
+                    {
+                        megfelelo = false;
+                    }
+                }
+                return megfelelo;
+            }
+            else
+            {
+                return false;
             }
         }
 

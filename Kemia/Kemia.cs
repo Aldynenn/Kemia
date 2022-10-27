@@ -63,6 +63,10 @@ namespace Kemia
             Felfedezo = felfedezo;
         }
 
+        public Kemia()
+        {
+        }
+
         public override string ToString()
         {
             return $"| {Ev} | {Elem} | {Vegyjel} | {Rendszam} | {Felfedezo} |";
